@@ -6,18 +6,25 @@ import Home from "./components/Home";
 import SearchPageComponent from "./components/SearchPageComponent";
 
 function App() {
+  // adding state managment for book shelf
   const [books, setBooks] = useState([]);
-
+// to render books condtitionally with changing the book shelf
   useEffect(() => {
     BooksAPI.getAll().then((books) => {
       setBooks([books]);
     });
   }, []);
+
+  // methode to update the selected book status for booth book shelf and search Page
   const update = (book, currentStatus) => {
     BooksAPI.update(book, currentStatus).then(
       BooksAPI.get(book.id).then((book) => {
         book.shelf = currentStatus;
-        setBooks([...books, book]);
+        setBooks(books
+          .filter((oldbook) => oldbook.id !== book.id)
+          .concat({
+            ...book,
+            currentStatus,}));
         console.log(books);
       })
     );

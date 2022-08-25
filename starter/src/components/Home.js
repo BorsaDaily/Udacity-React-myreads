@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import CardComponent from "./CardComponent";
 
-
+// displaying categorized book shelf
 const Home = ({ books,selectedBooks}) => {
+  // state mangement for each category
   const [currentReadingBooks, setCurrentReadingBooks] = useState([]);
   const [read, setRead] = useState([]);
   const [wantToRead, setWantToRead] = useState([]);
+
 useEffect(()=>{
   setCurrentReadingBooks(books.filter(book=>book.shelf==='Currently Reading'))
 },[books])
