@@ -14,13 +14,13 @@ const SearchPageComponent = ({ books, selectedBooks }) => {
   useEffect(() => {
     if (query.trim().length>0) {
       BooksAPI.search(query).then((result) => {
-        if (result.length > 0) {
+        if (result !==undefined) {
           setSearchbooks(result);
-          console.log(result)
         } else {
           setSearchbooks([]);
-          console.log(books)
         }
+      }).catch(err=>{console.log(err)
+        setSearchbooks([])
       });
     }
   }, [query]);
@@ -57,7 +57,7 @@ const SearchPageComponent = ({ books, selectedBooks }) => {
                         />
                       </li>
                     );
-                  })}</>:<>...</>}
+                  })}</>:<>Nothing Matches the Search Input</>}
                   
                 </ol>
               </div>

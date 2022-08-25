@@ -25,7 +25,6 @@ function App() {
           .concat({
             ...book,
             currentStatus,}));
-        console.log(books);
       })
     );
   };

@@ -94,7 +94,7 @@ body,
   outline: none;
 }
 
-.close-search {
+.close-search a {
   display: block;
   top: 20px;
   left: 15px;

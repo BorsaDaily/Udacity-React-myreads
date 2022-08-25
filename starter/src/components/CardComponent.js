@@ -18,7 +18,7 @@ const CardComponent = ({ book, selectedBooks }) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${book.imageLinks.thumbnail})`,
+              backgroundImage:  book?.imageLinks?.smallThumbnail !== undefined ? `url(${book?.imageLinks?.smallThumbnail})` : 'unset',
             }}
           ></div>
           <div className="book-shelf-changer">
@@ -41,7 +41,7 @@ const CardComponent = ({ book, selectedBooks }) => {
           </div>
         </div>
         <div className="book-title">{book.title}</div>
-        <div className="book-authors">{book.authors[0]}</div>
+        {[book.authors].map(bookAurther=><div key= {book.id} className="book-authors">{bookAurther}</div>)}
       </div>{" "}
     </>
   ) : (
