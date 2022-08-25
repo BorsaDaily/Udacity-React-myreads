@@ -1,24 +1,51 @@
 import "./App.css";
 import { useState, useEffect } from "react";
 import * as BooksAPI from "./BooksAPI";
-import CurrentReading from "./components/CurrentReading";
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./components/Home";
+import SearchPageComponent from "./components/SearchPageComponent";
 
 function App() {
-  // const [showSearchPage, setShowSearchpage] = useState(false);
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     BooksAPI.getAll().then((books) => {
-      setBooks(books);
+      setBooks([books]);
     });
-  }, [books.length]);
-
+  }, []);
+  const update = (book, currentStatus) => {
+    BooksAPI.update(book, currentStatus).then(
+      BooksAPI.get(book.id).then((book) => {
+        book.shelf = currentStatus;
+        setBooks([...books, book]);
+        console.log(books);
+      })
+    );
+  };
   return (
     <>
-    {console.log(books)}
-    <CurrentReading books={books}/>
+      <Routes>
+        <Route
+          path="/search"
+          element={
+            <>
+              <SearchPageComponent selectedBooks={update} />
+            </>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <>
+              <Home books={books} selectedBooks={update} />
+              <div className="open-search">
+                <Link to="/search">Add a book</Link>
+              </div>
+            </>
+          }
+        />
+      </Routes>
     </>
-
   );
 }
 
