@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CardComponent from "./CardComponent";
+import BookShelf from "./BookShelf";
 
 // displaying categorized book shelf
 const Home = ({ books,selectedBooks}) => {
@@ -18,57 +18,16 @@ useEffect(()=>{
   setWantToRead(books.filter(book=>book.shelf==='Want to Read'))
 },[books])
 
-  return currentReadingBooks.length > 0 ? (
+  return books.length > 0 ? (
     <div className="list-books">
       <div className="list-books-title">
         <h1>MyReads</h1>
       </div>
       <div className="list-books-content">
         <div>
-          <div className="bookshelf">
-            <h2 className="bookshelf-title">Currently Reading</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {currentReadingBooks.map((book) => {
-                  return (
-                    <li key={book.id}>
-                      <CardComponent
-                        book={book} selectedBooks={selectedBooks}
-                      />
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-            <h2 className="bookshelf-title">Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {read.map((book) => {
-                  return (
-                    <li key={book.id}>
-                      <CardComponent
-                        book={book} selectedBooks={selectedBooks}
-                      />
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-            <h2 className="bookshelf-title">Want to Read</h2>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {wantToRead.map((book) => {
-                  return (
-                    <li key={book.id}>
-                      <CardComponent
-                        book={book} selectedBooks={selectedBooks}
-                      />
-                    </li>
-                  );
-                })}
-              </ol>
-            </div>
-          </div>
+          <BookShelf books={currentReadingBooks} category ={"Currently Reading"} selectedBooks={selectedBooks}/>
+          <BookShelf books={read} category ={"Read"} selectedBooks={selectedBooks}/>
+          <BookShelf books={wantToRead} category ={"Want to Read"} selectedBooks={selectedBooks}/>
         </div>
       </div>
     </div>

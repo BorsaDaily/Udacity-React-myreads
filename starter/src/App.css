@@ -10,6 +10,7 @@ body,
 .app {
   background: 
    linear-gradient(to top, #30cfd0 0%, #330867 100%);
+   height: 100vh;
 }
 
 /* main page */
@@ -182,6 +183,10 @@ body,
   cursor: pointer;
 }
 
+option #selected {
+  color: #0c043b;
+  background: #30cfd0;
+}
 /* book cover */
 
 .book-cover {

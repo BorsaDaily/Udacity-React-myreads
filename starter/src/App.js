@@ -11,7 +11,7 @@ function App() {
 // to render books condtitionally with changing the book shelf
   useEffect(() => {
     BooksAPI.getAll().then((books) => {
-      setBooks([books]);
+      setBooks(books);
     });
   }, []);
 
