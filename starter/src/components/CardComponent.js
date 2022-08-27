@@ -6,11 +6,13 @@ const CardComponent = ({ book, selectedBooks }) => {
     const options = selectedOption.target.options;
     const index = selectedOption.target.selectedIndex;
     currentOption = selectedOption.target.options[index].text;
+    // clearing selected Id
     for (let i = 0; i < options.length; i++) {
       options[i].id = "";
     }
+    //selection process
     selectedOption.target.options[index].id = "selected";
-    console.log(options[index].style.color = 'red');
+    options[index].style.color = 'red';
     return currentOption;
   };
 
