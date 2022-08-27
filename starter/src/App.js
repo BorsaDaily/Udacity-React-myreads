@@ -11,11 +11,20 @@ function App() {
 // to render books condtitionally with changing the book shelf
   useEffect(() => {
     BooksAPI.getAll().then((books) => {
-      setBooks(books);
+      const storedBooks = JSON.parse(window.localStorage.getItem('books'))
+      setBooks(storedBooks);
     });
-  }, []);
+  },[]);
 
-  // methode to update the selected book status for booth book shelf and search Page
+  // useEffect(() => {
+  //     console.log(books)
+  //     window.localStorage.setItem('books',JSON.stringify(books))
+  //     console.log(JSON.parse(window.localStorage.getItem('books')))
+    
+  // }, [books.length]);
+
+
+  // methode to update and store the selected book status for booth book shelf and search Page
   const update = (book, currentStatus) => {
     BooksAPI.update(book, currentStatus).then(
       BooksAPI.get(book.id).then((book) => {
@@ -25,7 +34,7 @@ function App() {
           .concat({
             ...book,
             currentStatus,}));
-      })
+      }).then(()=>window.localStorage.setItem('books',JSON.stringify(books)))
     );
   };
   return (
